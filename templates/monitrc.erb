@@ -1,0 +1,13 @@
+set daemon <%= monit_interval %>            
+set logfile /var/log/monit.log
+set eventqueue
+    basedir /etc/monit/events 
+    slots 5000                     
+
+set httpd port 2812 and
+    use address 0.0.0.0
+    allow <%= monit_account %>:<%= monit_passwd %>
+#    allow @monit           # allow users of group 'monit' to connect (rw)
+#    allow @users readonly  # allow users of group 'users' to connect readonly
+
+include /etc/monit/conf.d/*
